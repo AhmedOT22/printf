@@ -1,0 +1,1 @@
+This is a `printf` function implementation created by Mouad bou-isselman and Ahmed Ouazzani as part of the alx software engineering program. The function allows formatting and printing text to the console. It takes a string as the first argument with placeholders for the values to be printed and additional arguments as required
