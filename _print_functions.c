@@ -7,15 +7,14 @@
  *
  * @args: list of arguments
  *
- * Return: Always 0 (Success)
+ * Return: the count of printed characters
  */
 
 int _print_char(va_list args)
 {
 	char c = (char) va_arg(args, int);
 
-	_putchar(c);
-	return (0);
+	return (_putchar(c));
 }
 
 /**
@@ -29,12 +28,23 @@ int _print_char(va_list args)
 int _print_string(va_list args)
 {
 	char *s = va_arg(args, char *);
-	int cp = 0;
 
-	while (*s)
+	if (s == NULL)
 	{
-		_putchar(*s++);
-		cp++;
-	}
-	return (cp);
+		s = "(null)";
+
+	return (write(1, s));
+}
+
+/**
+ * print_percent - print the % symbol
+ *
+ * @args: list of arguments
+ *
+ * Return: the count of printed characters
+ */
+
+int print_percent(va_list args)
+{
+	return (write(1, "%%", 1));
 }
