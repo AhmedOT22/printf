@@ -83,7 +83,7 @@ int write_num(int index, char buffer[], int flags, int width, int precision,
 		int length, char padd, char extra_c);
 int write_pointer(char buffer[], int index, int length, int width, int flags,
 		char padd, char extra_c, int padd_start);
-int write_unsigned(int is_negative, int index, char buffer[], int flags,
+int write_us(int is_negative, int index, char buffer[], int flags,
 		int width, int precision, int size);
 int is_printable(char);
 int append_hexa_code(char, char[], int);
