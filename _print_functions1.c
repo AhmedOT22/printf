@@ -10,7 +10,7 @@
  * Return: the count of printed characters
  */
 
-int _print_char(va_list args)
+int print_char(va_list args)
 {
 	char c = (char) va_arg(args, int);
 
@@ -25,7 +25,7 @@ int _print_char(va_list args)
  * Return: the count of printed characters
  */
 
-int _print_string(va_list args)
+int print_string(va_list args)
 {
 	char *s = va_arg(args, char *);
 
@@ -50,8 +50,8 @@ int print_percent(va_list args)
 }
 
 /**
- * print_int - Print int
- * @types: List of arguments
+ * print_int - Print an integer
+ * @args: List of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
  * @width: get width.
@@ -59,12 +59,13 @@ int print_percent(va_list args)
  * @size: Size specifier
  * Return: Number of chars printed
  */
-int print_int(va_list types, char buffer[],
+
+int print_int(va_list args, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int i = BUFF_SIZE - 2;
 	int is_negative = 0;
-	long int n = va_arg(types, long int);
+	long int n = va_arg(args, long int);
 	unsigned long int num;
 
 	n = convert_size_number(n, size);
@@ -93,8 +94,8 @@ int print_int(va_list types, char buffer[],
 }
 
 /**
- * print_binary - Prints an unsigned number
- * @types: List of arguments
+ * print_binary - Prints a binary number
+ * @args: List of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
  * @width: get width.
@@ -102,8 +103,9 @@ int print_int(va_list types, char buffer[],
  * @size: Size specifier
  * Return: Numbers of char printed.
  */
-int print_binary(va_list types, char buffer[],
-    int flags, int width, int precision, int size)
+
+int print_binary(va_list args, char buffer[], int flags,
+		int width, int precision, int size)
 {
 	unsigned int n, m, i, sum;
 	unsigned int a[32];
@@ -115,8 +117,9 @@ int print_binary(va_list types, char buffer[],
 	UNUSED(precision);
 	UNUSED(size);
 
-	n = va_arg(types, unsigned int);
-	m = 2147483648; / (2 ^ 31) / a[0] = n / m;
+	n = va_arg(args, unsigned int);
+	m = 2147483648;
+	a[0] = n / m;
 	for (i = 1; i < 32; i++)
 	{
 		m /= 2;
