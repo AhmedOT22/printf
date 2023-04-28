@@ -1,51 +1,105 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "main.h"
 
 /**
  * _print_char - print a character
  *
  * @args: list of arguments
- *
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: Precision specification
+ * @size: Size specifier
  * Return: the count of printed characters
  */
 
-int print_char(va_list args)
+int print_char(va_list args, char buffer[], int flags, int width,
+		int precision, int size)
 {
-	char c = (char) va_arg(args, int);
+	char c = va_arg(args, int);
 
-	return (_putchar(c));
+	return (handle_write_char(c, buffer, flags, width, precision, size));
 }
 
 /**
  * _print_string - print a string
  *
  * @args: list of arguments
- *
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: Precision specification
+ * @size: Size specifier
  * Return: the count of printed characters
  */
 
-int print_string(va_list args)
+int print_string(va_list args, char buffer[], int flags, int width,
+		int precision, int size)
 {
 	char *s = va_arg(args, char *);
+	int i, length = 0;
+
+	UNUSED(buffer);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
 
 	if (s == NULL)
 	{
 		s = "(null)";
-
-	return (write(1, s));
+		if (precision >= 6)
+			s = "      ";
+	}
+	while (s[length] != '\0')
+		length++;
+	if (precision >= 0 && precision < length)
+		length = precision;
+	if (width > length)
+	{
+		if (flags & F_MINUS)
+		{
+			write(1, &s[0], length);
+			for (i = width - length; i > 0; i--)
+				write(1, " ", 1);
+			return (width);
+		}
+		else
+		{
+			for (i = width - length; i > 0; i--)
+				write(1, " ", 1);
+			write(1, &s[0], length);
+			return (width);
+		}
+	}
+	return (write(1, s, length));
 }
 
 /**
  * print_percent - print the % symbol
  *
  * @args: list of arguments
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: Precision specification
+ * @size: Size specifier
  *
  * Return: the count of printed characters
  */
 
-int print_percent(va_list args)
+int print_percent(va_list args, char buffer[], int flags, int width,
+		int precision, int size)
 {
+	UNUSED(args);
+	UNUSED(buffer);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
+
 	return (write(1, "%%", 1));
 }
 
@@ -78,7 +132,7 @@ int print_int(va_list args, char buffer[],
 
 	if (n < 0)
 	{
-		num = (unsigned long int)((-1) n);
+		num = (unsigned long int)((-1) * n);
 		is_negative = 1;
 	}
 

@@ -48,13 +48,13 @@ int _printf(const char *format, ...)
 				print_buffer(buffer, &buff_index);
 			counter++;
 		}
-
 		else
+		{
 			print_buffer(buffer, &buff_index);
 			flags = get_flags(format, &i);
 			width = get_width(format, &i, args);
 			precision = get_precision(format, &i, args);
-			size = get_size(format, &i, args);
+			size = get_size(format, &i);
 			++i;
 			is_printed = printing_handler(format, &i, args, buffer, flags, width,
 					precision, size);

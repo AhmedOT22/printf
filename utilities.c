@@ -17,7 +17,7 @@ int is_printable(char c)
 }
 
 /**
- * append_hex - append ascii in hexadecimal to the buffer
+ * append_hexa_code - append ascii in hexadecimal to the buffer
  *
  * @buffer: an array of char
  * @i: index
@@ -26,7 +26,7 @@ int is_printable(char c)
  * Return: Always 3 (Success)
  */
 
-int append_hex(char ascii, char buffer[], int i)
+int append_hexa_code(char ascii, char buffer[], int i)
 {
 	char map[] = "0123456789ABCDEF";
 

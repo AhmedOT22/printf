@@ -45,9 +45,12 @@ typedef struct fmt fmt_t;
 int _printf(const char *format, ...);
 int printing_handler(const char *fmt, int *index, va_list args, char buffer[],
 		int flags, int width, int precision, int size);
-int print_char(va_list args);
-int print_string(va_list args);
-int print_percent(va_list args);
+int print_char(va_list args, char buffer[], int flags, int width,
+		int precision, int size);
+int print_string(va_list args, char buffer[], int flags, int width,
+		int precision, int size);
+int print_percent(va_list args, char buffer[], int flags, int width,
+		int precision, int size);
 int print_int(va_list args, char buffer[], int flags, int width, int precision,
 		int size);
 int print_binary(va_list args, char buffer[], int flags, int width,
@@ -71,18 +74,18 @@ int print_hexa(va_list args, char map[], char buffer[], int flags,
 int print_reverse(va_list args, char buffer[], int flags, int width,
 		int precision, int size);
 int get_flags(const char *format, int *i);
-int get_width(const *format, int *i, va_list args);
-int get_precision(const *format, int *i, va_list args);
-int get_size(const *format, int *i);
+int get_width(const char *format, int *i, va_list args);
+int get_precision(const char *format, int *i, va_list args);
+int get_size(const char *format, int *i);
 int handle_write_char(char c, char buffer[], int flags, int width,
 		int precision, int size);
-int write_number(char c, char buffer[], int flags, int width, int precision,
+int write_number(int is_positive, int index, char buffer[], int flags, int width, int precision,
 		int size);
-int write_num(char c, char buffer[], int flags, int width, int precision,
-		int length, char padd, char extra_c, int padd_start);
+int write_num(int index, char buffer[], int flags, int width, int precision,
+		int length, char padd, char extra_c);
 int write_pointer(char buffer[], int index, int length, int width, int flags,
 		char padd, char extra_c, int padd_start);
-int write_number(int is_negative, int index, char buffer[], int flags,
+int write_unsigned(int is_negative, int index, char buffer[], int flags,
 		int width, int precision, int size);
 int is_printable(char);
 int append_hexa_code(char, char[], int);
