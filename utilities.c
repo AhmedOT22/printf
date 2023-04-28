@@ -78,14 +78,14 @@ long int convert_size_number(long int num, int size)
 }
 
 /**
- * convert_size_unsigned - cast an unsigned number to a specified size
+ * convert_size_us - cast an unsigned number to a specified size
  * @num: number
  * @size: the size to convert to
  *
  * Return: the casted value of the number
  */
 
-long int convert_size_unsigned(unsigned long int num, int size)
+long int convert_size_us(unsigned long int num, int size)
 {
 	if (size == S_LONG)
 		return (num);
